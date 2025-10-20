@@ -1,6 +1,6 @@
 # initialm
 
-结合了WebAssembly 和 Svelte 的一个可以简单使用的项目脚手架模板,只需要编写js与golang就可以在不使用后端服务的情况下可以做到相近功能。这个项目由[gendk](https://github.com/langbiantianya/gendk)演化,回归js前端换来更好的定制性。
+这个项目由[gendk](https://github.com/langbiantianya/gendk)演化,回归js前端换来更好的定制性。结合了WebAssembly 和 Svelte 的一个可以简单使用的项目脚手架模板,只需要编写js与golang就可以在不使用后端服务的情况下可以做到相近功能。
 
 ## todo
 
