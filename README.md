@@ -1,38 +1,35 @@
-# sv
+# initialm
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+结合了WebAssembly 和 Svelte 的一个可以简单使用的项目脚手架模板,只需要编写js与golang就可以在不使用后端服务的情况下可以做到相近功能。
 
-## Creating a project
+## 开发
 
-If you're seeing this, you've probably already done this step. Congrats!
+### 环境
 
-```sh
-# create a new project in the current directory
-npx sv create
+- golang 1.25.3+
+- nodejs 22 | 23
+- make
 
-# create a new project in my-app
-npx sv create my-app
+### 命令
+
+#### 安装依赖
+
+```shell
+npm install && cd mao && go mod tidy && cd -
 ```
 
-## Developing
+#### 预览
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```shell
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+#### 编译
 
-To create a production version of your app:
-
-```sh
+```shell
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## 部署
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+这部分参考[svelte adapters](https://svelte.dev/docs/kit/adapters)
