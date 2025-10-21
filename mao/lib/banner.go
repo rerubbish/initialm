@@ -4,15 +4,9 @@ import (
 	"fmt"
 	"html/template"
 	"strings"
-
-	"mao/public"
 )
 
-func Banner(data any) {
-	content, err := public.StaticFs.ReadFile("banner.txt")
-	if err != nil {
-		return
-	}
+func Banner(content []byte, data any) {
 	banner := string(content)
 	if data != nil {
 		tpl, err := template.New("banner").Parse(banner)

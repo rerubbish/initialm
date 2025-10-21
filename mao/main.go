@@ -1,7 +1,14 @@
 package main
 
-import "mao/lib"
+import (
+	"mao/assets"
+	"mao/lib"
+)
 
 func main() {
-	lib.Banner(nil)
+	content, err := assets.StaticFs.ReadFile("banner.txt")
+	if err == nil {
+		lib.Banner(content, nil)
+	}
+
 }
