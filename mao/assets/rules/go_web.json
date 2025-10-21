@@ -1,0 +1,21 @@
+{
+    "variable": [
+        {
+            "filePath": "main.go",
+            "substitution": [
+                {
+                    "key": "Hello",
+                    "default": "默认值",
+                    "required": true,
+                    "group": "default"
+                }
+            ]
+        }
+    ],
+    "path": [
+        {
+            "source": "go.modd",
+            "target": "go.mod"
+        }
+    ]
+}
