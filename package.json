@@ -4,8 +4,8 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "cd mao && make && cd .. && vite dev",
-		"build": "cd mao && make && cd .. && vite build",
+		"dev": "cd mao && make build_go && cd .. && vite dev",
+		"build": "cd mao && make build_go && cd .. && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
