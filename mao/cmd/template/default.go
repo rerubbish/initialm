@@ -19,7 +19,7 @@ type DefaultTemplate struct {
 	rule rules.RuleData
 }
 
-func NewTempate(name string, data any, rule rules.RuleData) DefaultTemplate {
+func NewTempate(name string, data any, rule rules.RuleData) Template {
 	return DefaultTemplate{
 		name: name,
 		data: data,
