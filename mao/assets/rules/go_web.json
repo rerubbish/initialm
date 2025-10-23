@@ -1,4 +1,5 @@
 {
+    "verify": [],
     "variable": [
         {
             "filePath": "main.go",
