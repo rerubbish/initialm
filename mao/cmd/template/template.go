@@ -5,7 +5,7 @@ type TemplateData interface {
 }
 
 type ExportData interface {
-	B64Zip([]byte) (string, error)
+	B64Zip() (string, error)
 }
 
 type Template interface {
