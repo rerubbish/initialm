@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/fs"
+	"log/slog"
 	"mao/assets"
 	"mao/cmd/rules"
 	"path"
@@ -27,9 +28,9 @@ func NewTempate(name string, data any, rule rules.RuleData) Template {
 	}
 }
 
-func (t DefaultTemplate) applyVariableRule(fileData []byte, relPath string) ([]byte, error) {
+func (t DefaultTemplate) applyVariableRule(fileData []byte, filePath string) ([]byte, error) {
 	for _, variable := range t.rule.Variable {
-		if strings.Contains(relPath, variable.FilePath) {
+		if strings.Contains(filePath, variable.FilePath) {
 			tpl, err := template.New(variable.FilePath).Parse(string(fileData))
 			if err != nil {
 				return fileData, err
@@ -56,17 +57,24 @@ func (t DefaultTemplate) applyPathRule(relPath string) string {
 func (t DefaultTemplate) GenZip() ([]byte, error) {
 	var buf bytes.Buffer
 	zw := zip.NewWriter(&buf)
-	defer zw.Close()
-	err := fs.WalkDir(assets.StaticFs, fmt.Sprintf("mao/assets/template/%s", t.name), func(filePath string, d fs.DirEntry, walkErr error) error {
+	err := fs.WalkDir(assets.StaticFs, fmt.Sprintf("template/%s", t.name), func(filePath string, d fs.DirEntry, walkErr error) error {
 		if walkErr != nil {
 			return walkErr
 		}
-		relPath := strings.TrimPrefix(filePath, "mao/assets/template/")
+		relPath := strings.TrimPrefix(filePath, fmt.Sprintf("template/%s/", t.name))
+		if relPath == filePath { // 处理根目录情况
+			relPath = ""
+		}
+
+		relPath = t.applyPathRule(relPath)
+
 		if d.IsDir() {
 			// 跳过根目录的创建（relPath为空时不创建）
 			if relPath != "" {
 				// 创建目录条目（zip目录需要以/结尾）
-				_, err := zw.Create(path.Clean(t.applyPathRule(relPath) + "/"))
+				zpath := path.Clean(relPath + "/")
+				slog.Default().Debug("GenZip", "dir", zpath)
+				_, err := zw.Create(zpath)
 				return err
 			}
 			return nil
@@ -76,15 +84,18 @@ func (t DefaultTemplate) GenZip() ([]byte, error) {
 		if err != nil {
 			return err
 		}
-		fileData, err = t.applyVariableRule(fileData, relPath)
-		if err != nil {
-			return err
-		}
-		info, err := d.Info()
+
+		fileData, err = t.applyVariableRule(fileData, filePath)
 		if err != nil {
 			return err
 		}
 
+		info, err := d.Info()
+		if err != nil {
+			return err
+		}
+		slog.Default().Debug("GenZip", "fileName", info.Name())
+		slog.Default().Debug("GenZip", "fileContent", string(fileData))
 		// 创建文件头
 		fh, err := zip.FileInfoHeader(info)
 		if err != nil {
@@ -106,7 +117,7 @@ func (t DefaultTemplate) GenZip() ([]byte, error) {
 		return nil, err
 	}
 
-	if err := zw.Flush(); err != nil {
+	if err := zw.Close(); err != nil {
 		return nil, err
 	}
 
