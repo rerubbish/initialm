@@ -1,6 +1,11 @@
 <script>
+	export let data;
 	import { onMount } from 'svelte';
 	import Go from '../lib/wsam/wasm_exec';
+	import InputFiled from '../lib/component/inputFiled.svelte';
+	import { form } from '$app/server';
+
+	console.log('加载的JSON数据:', data);
 	/**
 	 * @type {Go | undefined}
 	 */
@@ -54,12 +59,12 @@
 	});
 </script>
 
-<svelte:head>
-	<!-- <script src="/wasm/wasm_exec.js"></script> -->
-</svelte:head>
-
 <div>
 	<div>
-		<h1 class="text-3xl">application initializr</h1>
+		<h1 class="text-3xl font-bold">application initializr</h1>
+		<form>
+			<InputFiled data={data.rulesJsonData[0].data.components[0]}/>
+			<button class="btn" type="submit">Submit form</button>
+		</form>
 	</div>
 </div>

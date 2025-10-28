@@ -1,5 +1,20 @@
 {
-    "verify": [],
+    "components": [
+        {
+            "label": "Hello?",
+            "tips": "你好占位符",
+            "type": "text",
+            "key": "Hello",
+            "validate": {
+                "required": true,
+                "ValidatorExpr": {
+                    "type": "pattern",
+                    "rule": "^[^0-9]*",
+                    "message": "Hello 不可为数字"
+                }
+            }
+        }
+    ],
     "variable": [
         {
             "filePath": "main.go",
