@@ -52,6 +52,9 @@
 				inst = result.instance;
 				console.log('wsam加载成功');
 				runWsam();
+				// 调用add函数（传递数字参数）
+				const sum = window.add(10, 20);
+				console.log('10 + 20 =', sum); // 输出：30
 			})
 			.catch((err) => {
 				console.error(err);
@@ -63,7 +66,7 @@
 	<div>
 		<h1 class="text-3xl font-bold">application initializr</h1>
 		<form>
-			<InputFiled data={data.rulesJsonData[0].data.components[0]}/>
+			<InputFiled data={data.rulesJsonData[0].data.components[0]} />
 			<button class="btn" type="submit">Submit form</button>
 		</form>
 	</div>
