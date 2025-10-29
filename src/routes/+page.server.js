@@ -9,6 +9,5 @@ export async function load() {
             data: module.default
         };
     });
-    console.log('rulesJsonData:', rulesJsonData);
     return { rulesJsonData };
 }

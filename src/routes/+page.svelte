@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import Go from '../lib/wsam/wasm_exec';
 	import InputFiled from '../lib/component/inputFiled.svelte';
-	import { form } from '$app/server';
 
 	console.log('加载的JSON数据:', data);
 	/**
@@ -66,7 +65,11 @@
 	<div>
 		<h1 class="text-3xl font-bold">application initializr</h1>
 		<form>
-			<InputFiled data={data.rulesJsonData[0].data.components[0]} />
+			{#each data.rulesJsonData[0].data.components as component}
+				{#if component.type === 'text'}
+					<InputFiled data={component} />
+				{/if}
+			{/each}
 			<button class="btn" type="submit">Submit form</button>
 		</form>
 	</div>
