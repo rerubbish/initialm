@@ -12,3 +12,7 @@ func Add(this js.Value, args []js.Value) interface{} {
 	b := args[1].Float()
 	return js.ValueOf(a + b) // 返回结果（转换为JS类型）
 }
+
+func ExportB64Zip(){
+	
+}
