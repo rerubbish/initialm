@@ -92,10 +92,10 @@ mao/assets/template/{模板名称} 模板目录
 ```json
 "components": [
         {
-            "label": "Hello?",
-            "tips": "你好占位符",
+            "label": "Hello Text?",
+            "tips": "你好文字",
             "type": "text",
-            "key": "Hello",
+            "key": "HelloText",
             "validate": {
                 "required": true,
                 "ValidatorExpr": {
@@ -104,8 +104,54 @@ mao/assets/template/{模板名称} 模板目录
                     "message": "Hello 不可为数字"
                 }
             }
+        },
+        {
+            "label": "Hello File?",
+            "tips": "你好文件",
+            "type": "file",
+            "key": "HelloFile",
+            "validate": {
+                "required": true
+            }
+        },
+        {
+            "label": "Hello Select?",
+            "tips": "你好下拉框",
+            "type": "select",
+            "options": [
+                {
+                    "lable": "下拉框1",
+                    "value": "下拉框value1"
+                },
+                {
+                    "lable": "下拉框2",
+                    "value": "下拉框value2",
+                    "default": true
+                }
+            ],
+            "key": "HelloSelect",
+            "validate": {
+                "required": true
+            }
+        },
+        {
+            "label": "Hello Checkbox?",
+            "tips": "你好多选框",
+            "type": "checkbox",
+            "options": [
+                {
+                    "lable": "多选框1",
+                    "value": "多选框value1",
+                    "required": true
+                },
+                {
+                    "lable": "多选框2",
+                    "value": "多选框value2"
+                }
+            ],
+            "key": "HelloCheckbox"
         }
-    ]
+    ],
 ```
 
 ##### 生成逻辑

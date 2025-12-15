@@ -5,13 +5,11 @@
 <legend class="fieldset-legend">{data.label}</legend>
 <input
 	name={data.key}
-	type="text"
-	class="input validator"
+	type="file"
+	class="file-input validator"
 	required={data.validate.required}
 	placeholder={data.tips}
-	pattern={data.validate.ValidatorExpr.rule}
 />
 <span class="validator-hint">
 	{@html data.validate.required && '必填 <br />'}
-	{data.validate.ValidatorExpr.message}
 </span>

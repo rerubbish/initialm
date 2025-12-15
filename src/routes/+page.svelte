@@ -1,9 +1,13 @@
 <script>
 	export let data;
-	const { rulesData = [] } = data;
 	import { onMount } from 'svelte';
-	import Go from '../lib/wsam/wasm_exec';
-	import InputFiled from '../lib/component/inputFiled.svelte';
+	import Go from '$lib//wsam/wasm_exec';
+	import InputFiled from '$lib//component/InputFiled.svelte';
+	import FileInputFiled from '$lib/component/FileInputFiled.svelte';
+	import SelectFiled from '$lib/component/SelectFiled.svelte';
+	import CheckboxFiled from '$lib/component/CheckboxFiled.svelte';
+
+	const { rulesData = [] } = data;
 	$: genformData = rulesData[0].data;
 	/**
 	 * @type {Go | undefined}
@@ -65,19 +69,30 @@
 <div>
 	<div>
 		<h1 class="text-3xl font-bold">application initializr</h1>
-		<select name="ruleName" onchange={ruleNameSelectChange}>
+		<select name="ruleName" onchange={ruleNameSelectChange} class="select">
 			<option value="[]">无</option>
 			{#each rulesData as data, index}
 				<option value={JSON.stringify(data.data)} selected={index === 0}> {data.filename} </option>
 			{/each}
 		</select>
 		<form>
-			{#each genformData.components as component}
-				{#if component.type === 'text'}
-					<InputFiled data={component} />
-				{/if}
-			{/each}
-			<button class="btn" type="submit">Submit form</button>
+			<fieldset class="fieldset">
+				{#each genformData.components as component}
+					{#if component.type === 'text'}
+						<InputFiled data={component} />
+					{/if}
+					{#if component.type === 'file'}
+						<FileInputFiled data={component} />
+					{/if}
+					{#if component.type === 'select'}
+						<SelectFiled data={component} />
+					{/if}
+					{#if component.type === 'checkbox'}
+						<CheckboxFiled data={component} />
+					{/if}
+				{/each}
+				<button class="btn" type="submit">Submit form</button>
+			</fieldset>
 		</form>
 	</div>
 </div>

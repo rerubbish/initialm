@@ -3,15 +3,18 @@
 </script>
 
 <legend class="fieldset-legend">{data.label}</legend>
-<input
+
+<select
 	name={data.key}
-	type="text"
-	class="input validator"
+	class="select validator"
 	required={data.validate.required}
 	placeholder={data.tips}
-	pattern={data.validate.ValidatorExpr.rule}
-/>
+>
+	{#each data.options as option}
+		<option value={option.value} selected={option.default}>{option.lable}</option>
+	{/each}
+</select>
+
 <span class="validator-hint">
 	{@html data.validate.required && '必填 <br />'}
-	{data.validate.ValidatorExpr.message}
 </span>
