@@ -12,6 +12,6 @@
 	pattern={data.validate.ValidatorExpr.rule}
 />
 <div class="validator-hint">
-	{@html data.validate.required && '必填。'}
+	{data.validate.required && '必填。'}
 	{data.validate.ValidatorExpr.message}
 </div>
