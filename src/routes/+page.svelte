@@ -66,16 +66,20 @@
 	});
 </script>
 
-<div>
-	<div>
+<div class="h-full w-full">
+	<div class="mt-4 m-auto w-xs space-y-4">
 		<h1 class="text-3xl font-bold">application initializr</h1>
-		<select name="ruleName" onchange={ruleNameSelectChange} class="select">
-			<option value="[]">无</option>
-			{#each rulesData as data, index}
-				<option value={JSON.stringify(data.data)} selected={index === 0}> {data.filename} </option>
-			{/each}
-		</select>
-		<form>
+		<div>
+			<legend class="fieldset-legend">选择模板</legend>
+			<select name="ruleName" onchange={ruleNameSelectChange} class="select mb-8">
+				{#each rulesData as data, index}
+					<option value={JSON.stringify(data.data)} selected={index === 0}>
+						{data.data?.name || data.filename}
+					</option>
+				{/each}
+			</select>
+		</div>
+		<form class="w-xs">
 			<fieldset class="fieldset">
 				{#each genformData.components as component}
 					{#if component.type === 'text'}
@@ -91,7 +95,7 @@
 						<CheckboxFiled data={component} />
 					{/if}
 				{/each}
-				<button class="btn" type="submit">Submit form</button>
+				<button class="btn btn-primary" type="submit">Submit form</button>
 			</fieldset>
 		</form>
 	</div>

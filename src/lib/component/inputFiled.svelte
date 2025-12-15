@@ -11,7 +11,7 @@
 	placeholder={data.tips}
 	pattern={data.validate.ValidatorExpr.rule}
 />
-<span class="validator-hint">
-	{@html data.validate.required && '必填 <br />'}
+<div class="validator-hint">
+	{@html data.validate.required && '必填。'}
 	{data.validate.ValidatorExpr.message}
-</span>
+</div>

@@ -15,8 +15,8 @@
 				placeholder={data.tips}
 			/>{option.lable}</label
 		>
-		<span class="validator-hint">
+		<div class="validator-hint">
 			{@html option.required && '必填 <br />'}
-		</span>
+		</div>
 	{/each}
 </div>

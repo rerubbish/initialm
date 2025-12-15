@@ -10,11 +10,12 @@
 	required={data.validate.required}
 	placeholder={data.tips}
 >
+	<option disabled selected value="">无</option>
 	{#each data.options as option}
 		<option value={option.value} selected={option.default}>{option.lable}</option>
 	{/each}
 </select>
 
-<span class="validator-hint">
+<div  class="validator-hint">
 	{@html data.validate.required && '必填 <br />'}
-</span>
+</div >

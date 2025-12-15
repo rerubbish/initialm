@@ -10,6 +10,6 @@
 	required={data.validate.required}
 	placeholder={data.tips}
 />
-<span class="validator-hint">
+<div class="validator-hint">
 	{@html data.validate.required && '必填 <br />'}
-</span>
+</div>

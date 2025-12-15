@@ -1,4 +1,5 @@
 {
+    "name":"go web基础模板",
     "components": [
         {
             "label": "Hello Text?",
