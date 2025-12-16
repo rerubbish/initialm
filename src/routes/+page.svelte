@@ -2,7 +2,7 @@
 	export let data;
 	import { onMount } from 'svelte';
 	import Go from '$lib/wsam/wasm_exec';
-	import InputFiled from '$lib/component/InputFiled.svelte';
+	import InputField from '$lib/component/InputField.svelte';
 	import FileInputFiled from '$lib/component/FileInputFiled.svelte';
 	import SelectFiled from '$lib/component/SelectFiled.svelte';
 	import CheckboxFiled from '$lib/component/CheckboxFiled.svelte';
@@ -83,7 +83,7 @@
 			<fieldset class="fieldset">
 				{#each genformData.components as component}
 					{#if component.type === 'text'}
-						<InputFiled data={component} />
+						<InputField data={component} />
 					{/if}
 					{#if component.type === 'file'}
 						<FileInputFiled data={component} />
