@@ -1,7 +1,7 @@
 <script>
 	export let data;
 	import { onMount } from 'svelte';
-	import Go from '$lib//wsam/wasm_exec';
+	import Go from '$lib/wsam/wasm_exec';
 	import InputFiled from '$lib/component/InputFiled.svelte';
 	import FileInputFiled from '$lib/component/FileInputFiled.svelte';
 	import SelectFiled from '$lib/component/SelectFiled.svelte';
