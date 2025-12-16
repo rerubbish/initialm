@@ -3,9 +3,9 @@
 	import { onMount } from 'svelte';
 	import Go from '$lib/wsam/wasm_exec';
 	import InputField from '$lib/component/InputField.svelte';
-	import FileInputFiled from '$lib/component/FileInputFiled.svelte';
-	import SelectFiled from '$lib/component/SelectFiled.svelte';
-	import CheckboxFiled from '$lib/component/CheckboxFiled.svelte';
+	import FileInputField from '$lib/component/FileInputField.svelte';
+	import SelectField from '$lib/component/SelectField.svelte';
+	import CheckboxField from '$lib/component/CheckboxField.svelte';
 
 	const { rulesData = [] } = data;
 	$: genformData = rulesData[0].data;
@@ -86,13 +86,13 @@
 						<InputField data={component} />
 					{/if}
 					{#if component.type === 'file'}
-						<FileInputFiled data={component} />
+						<FileInputField data={component} />
 					{/if}
 					{#if component.type === 'select'}
-						<SelectFiled data={component} />
+						<SelectField data={component} />
 					{/if}
 					{#if component.type === 'checkbox'}
-						<CheckboxFiled data={component} />
+						<CheckboxField data={component} />
 					{/if}
 				{/each}
 				<button class="btn btn-primary" type="submit">Submit form</button>
