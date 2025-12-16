@@ -82,7 +82,6 @@ mao/assets/template/{模板名称} 模板目录
 - text
 - file
 - select
-- radio
 - checkbox
 
 #### 规则
