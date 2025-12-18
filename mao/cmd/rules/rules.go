@@ -8,6 +8,7 @@ type Rules interface {
 }
 
 type RuleData struct {
+	Name string `json:"name"`
 	// 变量替换规则（对应 JSON 中的 "variable" 字段）
 	Variable []VariableRule `json:"variable"`
 	// 路径/文件名替换（对应 JSON 中的 "path" 字段）

@@ -79,7 +79,7 @@
 				{/each}
 			</select>
 		</div>
-		<form class="w-xs">
+		<form class="w-xs" action="">
 			<fieldset class="fieldset">
 				{#each genformData.components as component}
 					{#if component.type === 'text'}
