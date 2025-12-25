@@ -16,7 +16,10 @@
 {
     "name":"模板名称",
     "data":{
-        "HelloText":"在rules中定义的key"
+        "在rules中定义的key":{
+            "type":"string",
+            "value":"在rules中定义的key对应的value"
+        }
     }
 }
 ```
