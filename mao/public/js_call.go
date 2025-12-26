@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"log/slog"
 	"mao/cmd/msg"
+	"mao/cmd/rules"
+	"mao/cmd/template"
 	"syscall/js"
 )
 
@@ -29,9 +31,34 @@ func GenZip(this js.Value, args []js.Value) interface{} {
 	var exData msg.ExData
 	err := json.Unmarshal([]byte(dataStr), &exData)
 	if err != nil {
-		slog.Error("json反序列化失败", err.Error())
+		slog.Error("json反序列化失败", "异常", err)
 		return js.ValueOf("json反序列化失败")
 	}
 	slog.Info("GenZip", "exData", exData)
-	return js.ValueOf("success")
+	// 遍历ExData的data将data转为map[string]string
+	data := make(map[string]string)
+
+	for key, item := range exData.Data {
+		if item.Type != msg.TypeText {
+			slog.Error("目前只处理文本类型", "key", key, "type", item.Type)
+			return js.ValueOf("目前只处理文本类型")
+		}
+		data[key] = item.Value.(string)
+	}
+	// 取出name
+
+	// 使用name获取规则
+	rule, err := rules.MaoRules.GetRules(exData.Name)
+	if err != nil {
+		slog.Error("获取规则失败", "异常", err)
+		return js.ValueOf(err.Error())
+	}
+
+	render := template.NewTempate(data, rule)
+	b64Data, err := render.B64Zip()
+	if err != nil {
+		slog.Error("渲染失败", "异常", err)
+		return js.ValueOf(err.Error())
+	}
+	return js.ValueOf(b64Data)
 }

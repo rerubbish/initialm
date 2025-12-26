@@ -15,14 +15,12 @@ import (
 )
 
 type DefaultTemplate struct {
-	name string
 	data any
 	rule rules.RuleData
 }
 
-func NewTempate(name string, data any, rule rules.RuleData) Template {
+func NewTempate(data any, rule rules.RuleData) Template {
 	return DefaultTemplate{
-		name: name,
 		data: data,
 		rule: rule,
 	}
@@ -57,11 +55,11 @@ func (t DefaultTemplate) applyPathRule(relPath string) string {
 func (t DefaultTemplate) GenZip() ([]byte, error) {
 	var buf bytes.Buffer
 	zw := zip.NewWriter(&buf)
-	err := fs.WalkDir(assets.StaticFs, fmt.Sprintf("template/%s", t.name), func(filePath string, d fs.DirEntry, walkErr error) error {
+	err := fs.WalkDir(assets.StaticFs, fmt.Sprintf("template/%s", t.rule.FileName), func(filePath string, d fs.DirEntry, walkErr error) error {
 		if walkErr != nil {
 			return walkErr
 		}
-		relPath := strings.TrimPrefix(filePath, fmt.Sprintf("template/%s/", t.name))
+		relPath := strings.TrimPrefix(filePath, fmt.Sprintf("template/%s/", t.rule.FileName))
 		if relPath == filePath { // 处理根目录情况
 			relPath = ""
 		}
