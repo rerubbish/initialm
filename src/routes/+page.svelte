@@ -44,6 +44,7 @@
 		genformData = rule;
 	}
 	onMount(() => {
+		console.log(genformData);
 		go = new Go();
 		if (!WebAssembly.instantiateStreaming) {
 			// polyfill
@@ -82,21 +83,31 @@
 		<form
 			class="w-xs"
 			action=""
-			onsubmit={(e) => {
+			onsubmit={async (e) => {
 				e.preventDefault(); // 阻止默认提交行为
 				const formData = new FormData(e.target); // 获取表单数据
 
 				// 将FormData转换为JavaScript对象以便使用
 				const data = {};
 				for (const [key, value] of formData.entries()) {
-					data[key] = value;
+					// 判断value 是否为文件,是文件的话以文本方式读取转为字符串
+					if (value instanceof File) {
+						data[key] = await value.text();
+					} else {
+						data[key] = value;
+					}
 				}
-				// 调用GenZip函数（传递字符串参数）
-				const zip = window.GenZip(
-					JSON.stringify({ name: 'xx', data: { emm: { type: 'text', value: '123' } } })
+				const b64zip = window.genZip(
+					JSON.stringify({
+						name: genformData.name,
+						data
+					})
 				);
-				console.log('生成的zip文件:', zip);
-				console.log('表单数据:', data);
+				const a = document.createElement('a');
+				a.href = `data:application/zip;base64,${b64zip}`;
+				a.download = 'go web基础模板.zip';
+				a.click();
+				a.remove();
 			}}
 		>
 			<fieldset class="fieldset">
