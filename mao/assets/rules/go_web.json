@@ -64,15 +64,7 @@
     ],
     "variable": [
         {
-            "filePath": "main.go",
-            "substitution": [
-                {
-                    "key": "Hello",
-                    "default": "默认值",
-                    "required": true,
-                    "group": "default"
-                }
-            ]
+            "filePath": "main.go"
         }
     ],
     "path": [

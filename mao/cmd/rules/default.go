@@ -37,12 +37,20 @@ func init() {
 				slog.Default().Error(fmt.Sprintf("反序列化%s失败", d.Name()), "err", err)
 				continue // 处理 JSON 格式错误
 			}
+			name := ruleData.Name
 			// 1. 获取文件名（如 "data.json"）
 			base := filepath.Base(d.Name())
 			// 2. 获取扩展名（如 ".json"）
 			ext := filepath.Ext(base)
-			// 3. 截取文件名，去掉扩展名
-			MaoRules.AddRules(base[:len(base)-len(ext)], ruleData)
+			if name == "" {
+				// 3. 截取文件名，去掉扩展名
+				name = base[:len(base)-len(ext)]
+				ruleData.FileName = name
+			} else {
+				ruleData.FileName = base[:len(base)-len(ext)]
+			}
+
+			MaoRules.AddRules(name, ruleData)
 			slog.Default().Info(fmt.Sprintf("加载规则%s成功", d.Name()))
 		}
 	}
@@ -57,8 +65,11 @@ func (r DefaultRules) GetAllRules() []RuleData {
 	return values
 }
 
-func (r DefaultRules) GetRules(name string) RuleData {
-	return r.ruleData[name]
+func (r DefaultRules) GetRules(name string) (RuleData, error) {
+	if rule, exists := r.ruleData[name]; exists {
+		return rule, nil
+	}
+	return RuleData{}, fmt.Errorf("规则 %s 不存在", name)
 }
 
 func (r *DefaultRules) AddRules(name string, rule RuleData) {

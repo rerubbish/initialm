@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("变量:{{.Hello}}")
+	fmt.Println("变量:{{.HelloText}}")
 }

@@ -52,23 +52,14 @@ mao/assets/template/{模板名称} 模板目录
 
 ##### 例子
 
+在这里写入需要进行模板渲染的文件路径
+
 - filePath 模板项目中的文件路径，例如`main.go`
-- substitution
-  - key 变量的关键字，例如`Hello`
-  - default 默认值，例如`默认值`
-  - required 是否必填，例如`true`
 
 ```json
 "variable": [
         {
-            "filePath": "main.go",
-            "substitution": [
-                {
-                    "key": "Hello",
-                    "default": "默认值",
-                    "required": true
-                }
-            ]
+            "filePath": "main.go"
         }
     ]
 ```
@@ -87,6 +78,8 @@ mao/assets/template/{模板名称} 模板目录
 #### 规则
 
 ##### 例子
+
+变量key必须全局唯一,不能重复。
 
 ```json
 "components": [
