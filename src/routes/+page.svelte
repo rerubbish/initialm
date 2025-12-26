@@ -44,7 +44,6 @@
 		genformData = rule;
 	}
 	onMount(() => {
-		console.log(genformData);
 		go = new Go();
 		if (!WebAssembly.instantiateStreaming) {
 			// polyfill
@@ -92,11 +91,12 @@
 				for (const [key, value] of formData.entries()) {
 					// 判断value 是否为文件,是文件的话以文本方式读取转为字符串
 					if (value instanceof File) {
-						data[key] = await value.text();
+						data[key] = { type: 'text', value: await value.text() };
 					} else {
-						data[key] = value;
+						data[key] = { type: 'text', value: value };
 					}
 				}
+				console.log(data);
 				const b64zip = window.genZip(
 					JSON.stringify({
 						name: genformData.name,
