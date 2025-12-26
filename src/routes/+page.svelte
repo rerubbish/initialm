@@ -93,7 +93,7 @@
 					if (value instanceof File) {
 						data[key] = { type: 'text', value: await value.text() };
 					} else {
-						data[key] = { type: 'text', value: await value };
+						data[key] = { type: 'text', value: value };
 					}
 				}
 				console.log(data);
