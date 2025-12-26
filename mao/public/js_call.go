@@ -19,13 +19,17 @@ func Add(this js.Value, args []js.Value) interface{} {
 }
 
 // 这个方法接收前端传递过来的json字符串
-func GenZip(this js.Value, data js.Value) interface{} {
+func GenZip(this js.Value, args []js.Value) interface{} {
 	// 将data转换为字符串
-	dataStr := data.String()
+	if len(args) < 1 {
+		return js.ValueOf("参数不足，需要1个json字符串")
+	}
+	dataStr := args[0].String()
 	// 反序列化为ExData
 	var exData msg.ExData
 	err := json.Unmarshal([]byte(dataStr), &exData)
 	if err != nil {
+		slog.Error("json反序列化失败", err.Error())
 		return js.ValueOf("json反序列化失败")
 	}
 	slog.Info("GenZip", "exData", exData)

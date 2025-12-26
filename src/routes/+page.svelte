@@ -85,16 +85,18 @@
 			onsubmit={(e) => {
 				e.preventDefault(); // 阻止默认提交行为
 				const formData = new FormData(e.target); // 获取表单数据
-				
+
 				// 将FormData转换为JavaScript对象以便使用
 				const data = {};
 				for (const [key, value] of formData.entries()) {
 					data[key] = value;
 				}
-				
+				// 调用GenZip函数（传递字符串参数）
+				const zip = window.GenZip(
+					JSON.stringify({ name: 'xx', data: { emm: { type: 'text', value: '123' } } })
+				);
+				console.log('生成的zip文件:', zip);
 				console.log('表单数据:', data);
-				// TODO 调用go
-				alert('表单提交成功，数据已打印到控制台');
 			}}
 		>
 			<fieldset class="fieldset">
